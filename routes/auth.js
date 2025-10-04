@@ -4,16 +4,17 @@
 */
 
 import { Router } from "express";
+import {
+  createUser,
+  loginUser,
+  revalidateToken,
+} from "../controllers/auth.js";
 
 const router = Router();
 
-router.get("/", (req, res) => {
-  console.log("The / is required.");
-
-  res.json({
-    ok: true,
-  });
-});
+router.post("/new", createUser);
+router.post("/", loginUser);
+router.get("/renew", revalidateToken);
 
 // module.exports = router;
 export { router };
