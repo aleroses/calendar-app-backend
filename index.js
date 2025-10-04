@@ -1,26 +1,16 @@
-// const express = require("express");
 import express from "express";
 import "dotenv/config";
-// import dotenv from "dotenv";
-
-// dotenv.config({ path: ".env" });
-
-console.log(process.env);
+import { router as authRoutes } from "./routes/auth.js";
 
 // Create the Express server
 const app = express();
 
-// Rutes
 // Public directory
 app.use(express.static("public"));
 
-// app.get("/", (req, res) => {
-//   console.log("The / is required.");
-
-//   res.json({
-//     ok: true,
-//   });
-// });
+// Rutes
+app.use("/api/auth", authRoutes);
+// TODO: CRUD: Events
 
 // Listen to requests
 app.listen(process.env.PORT, () => {
