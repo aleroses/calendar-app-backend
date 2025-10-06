@@ -5,6 +5,7 @@
 
 import { Router } from "express";
 import { check } from "express-validator";
+import { validateFields } from "../middlewares/validate-fields.js";
 import {
   createUser,
   loginUser,
@@ -23,6 +24,7 @@ router.post(
       "password",
       "The password must be 6 characters long."
     ).isLength({ min: 6 }),
+    validateFields,
   ],
   createUser
 );
@@ -34,6 +36,7 @@ router.post(
       "password",
       "The password must be 6 characterslong."
     ).isLength({ min: 6 }),
+    validateFields,
   ],
   loginUser
 );
