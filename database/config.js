@@ -10,9 +10,3 @@ export const dbConnection = async () => {
     throw new Error("Error initializing the database.");
   }
 };
-
-// const x = {
-//   useNewUrlParser: true,
-//   useUnifiedTopology: true,
-//   useCreateIndex: true,
-// };
