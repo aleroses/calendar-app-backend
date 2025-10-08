@@ -11,6 +11,7 @@ import {
   loginUser,
   revalidateToken,
 } from "../controllers/auth.js";
+import { validateJWT } from "../middlewares/validate-jwt.js";
 
 const router = Router();
 
@@ -28,6 +29,7 @@ router.post(
   ],
   createUser
 );
+
 router.post(
   "/",
   [
@@ -40,7 +42,8 @@ router.post(
   ],
   loginUser
 );
-router.get("/renew", revalidateToken);
+
+router.get("/renew", validateJWT, revalidateToken);
 
 // module.exports = router;
 export { router };

@@ -88,9 +88,19 @@ export const loginUser = async (req, res = response) => {
   }
 };
 
-export const revalidateToken = (req, res = response) => {
+export const revalidateToken = async (
+  req,
+  res = response
+) => {
+  const { uid, name } = req;
+
+  // Generate a new JWT and return it in this request.
+  const token = await generateJWT(uid, name);
+
   res.json({
     ok: true,
-    msg: "renew",
+    // uid,
+    // name,
+    token,
   });
 };
