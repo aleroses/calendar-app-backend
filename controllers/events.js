@@ -8,6 +8,9 @@ export const getEvent = (req, res = response) => {
 };
 
 export const createEvent = (req, res = response) => {
+  // Verify that it have the event
+  console.log(req.body);
+
   res.json({
     ok: true,
     msg: "Create event",
