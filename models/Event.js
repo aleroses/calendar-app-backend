@@ -19,7 +19,15 @@ const EventSchema = Schema({
   user: {
     type: Schema.Types.ObjectId,
     ref: "User",
+    required: true,
   },
 });
 
-export const User = model("Event", EventSchema);
+EventSchema.method("toJSON", function () {
+  const { __v, _id, ...object } = this.toObject();
+  object.id = _id;
+
+  return object;
+});
+
+export const Event = model("Event", EventSchema);
