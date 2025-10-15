@@ -99,8 +99,8 @@ export const revalidateToken = async (
 
   res.json({
     ok: true,
-    // uid,
-    // name,
+    uid,
+    name,
     token,
   });
 };

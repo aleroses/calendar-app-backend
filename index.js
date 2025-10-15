@@ -1,9 +1,16 @@
+import path from "path";
+import { fileURLToPath } from "url";
+
 import express from "express";
 import cors from "cors";
 import "dotenv/config";
 import { router as authRoutes } from "./routes/auth.js";
 import { dbConnection } from "./database/config.js";
 import { router as eventRoutes } from "./routes/events.js";
+
+// ✅ This replaces __dirname in ESM.
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // Create the Express server
 const app = express();
@@ -15,7 +22,8 @@ dbConnection();
 app.use(cors());
 
 // Public directory
-app.use(express.static("public"));
+// app.use(express.static("public"));
+app.use(express.static(path.join(__dirname, "public")));
 
 // Reading and parsing the body
 app.use(express.json());
@@ -24,6 +32,10 @@ app.use(express.json());
 app.use("/api/auth", authRoutes);
 // TODO: CRUD: Events
 app.use("/api/events", eventRoutes);
+
+app.get("/*splat", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "index.html"));
+});
 
 // Listen to requests
 app.listen(process.env.PORT, () => {
